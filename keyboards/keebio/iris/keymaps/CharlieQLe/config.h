@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define NO_ACTION_FUNCTION
 #define TAPPING_TOGGLE 1
 #undef RGBLIGHT_ANIMATIONS
-#define RGBLIGHT_EFFECT_BREATHING
+#undef RGBLIGHT_EFFECT_BREATHING
 #undef RGBLIGHT_EFFECT_RAINBOW_MOOD
 #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
 #undef RGBLIGHT_EFFECT_SNAKE
@@ -35,5 +35,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #undef RGBLIGHT_EFFECT_TWINKLE
 #define RGBLIGHT_LAYERS
 #define RGBLIGHT_LAYERS_RETAIN_VAL
-#define RGBLIGHT_MAX_LAYERS 2
-#define RGBLIGHT_LAYERS_OVERRIDE_RGB_OFF
+#define RGBLIGHT_SLEEP
+#define RGBLIGHT_SPLIT

@@ -72,15 +72,8 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
    switch (biton32(state)) {
-      case _ARROW:
-         if (layer_state_cmp(state, _FUNCTION)) {
-            rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING);
-         } else {
-            rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL);
-         }
-         break;
-      case _FUNCTION: rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING); break;
-      default: rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL); break;
+      case _QWERTY: rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL); break;
+      case _FUNCTION: rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT); break;
    }
    return state;
 }
