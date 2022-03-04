@@ -1,6 +1,5 @@
 #include QMK_KEYBOARD_H
 
-
 #define _QWERTY 0
 #define _ARROW 1
 #define _FUNCTION 2
@@ -43,9 +42,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_F12,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_HOME,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_PGUP, KC_PGDN,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RESET,            EEP_RST, KC_TRNS, KC_TRNS, KC_MINS, KC_EQL,  KC_DEL,  KC_TRNS,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
@@ -62,18 +61,10 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
          tap_code(KC_VOLD);
       }
    } else if (index == 1) {
-      if (layer_state_cmp(layer_state, _FUNCTION)) {
-         if (clockwise) {
-            rgblight_increase_val();
-         } else {
-            rgblight_decrease_val();
-         }
+      if (clockwise) {
+         rgblight_increase_val();
       } else {
-         if (clockwise) {
-            tap_code(KC_MS_WH_DOWN);
-         } else {
-            tap_code(KC_MS_WH_UP);
-         }
+         rgblight_decrease_val();
       }
    }
    return true;
@@ -83,17 +74,17 @@ layer_state_t layer_state_set_user(layer_state_t state) {
    switch (biton32(state)) {
       case _ARROW:
          if (layer_state_cmp(state, _FUNCTION)) {
-            rgblight_enable_noeeprom();
+            rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING);
          } else {
-            rgblight_disable_noeeprom();
+            rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL);
          }
          break;
-      case _FUNCTION: rgblight_enable_noeeprom(); break;
-      default: rgblight_disable_noeeprom(); break;
+      case _FUNCTION: rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING); break;
+      default: rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL); break;
    }
    return state;
 }
 
 void keyboard_post_init_user() {
-   rgblight_disable_noeeprom();
+   rgblight_enable_noeeprom();
 }
