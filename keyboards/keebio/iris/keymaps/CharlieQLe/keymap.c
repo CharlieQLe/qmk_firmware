@@ -4,10 +4,6 @@
 #define _ARROW 1
 #define _FUNCTION 2
 
-enum custom_keycodes {
-  QWERTY = SAFE_RANGE,
-};
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT(
@@ -62,9 +58,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
       }
    } else if (index == 1) {
       if (clockwise) {
-         rgblight_increase_val();
+         rgblight_increase_val_noeeprom();
       } else {
-         rgblight_decrease_val();
+         rgblight_decrease_val_noeeprom();
       }
    }
    return true;
