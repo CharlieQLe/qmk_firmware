@@ -63,7 +63,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
          rgblight_decrease_val_noeeprom();
       }
    }
-   return true;
+   return false;.
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
